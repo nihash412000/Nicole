@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>White and Bright Laundry | Clean, Fresh, Professional</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Service City Restriction Notice -->
+  <div class="city-banner">📍 Doorstep Pickup & Delivery Available Exclusively in Tiruchirappalli (Trichy) City</div>
+
+  <!-- Header -->
+  <header>
+    <div class="navbar">
+      <a href="#" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+        White and Bright Laundry
+      </a>
+      <div class="nav-links">
+        <a href="#gallery">Quality Standard</a>
+        <a href="#booking">Book Service</a>
+        <a href="#reviewsSection">Reviews</a>
+        <button class="btn btn-secondary" id="adminNavBtn" onclick="handleAdminAuth()">Owner Admin Login</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+      <h3 style="margin-bottom: 0.5rem;">🔒 Admin Login</h3>
+      <p style="color: var(--slate-muted); font-size: 0.88rem; margin-bottom: 1rem;">Enter your registered admin credentials.</p>
+      
+      <div class="form-group">
+        <label>Admin Email</label>
+        <input type="email" id="loginEmail" class="form-control" placeholder="whiteandbrightlaundry786@gmail.com">
+      </div>
+      <div class="form-group">
+        <label>Admin Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="loginPassword" class="form-control" placeholder="Password" onkeyup="if(event.key==='Enter') verifyAdminLogin()">
+          <button type="button" class="password-toggle-btn" id="togglePasswordBtn" onclick="togglePasswordVisibility('loginPassword', 'togglePasswordBtn')">👁️</button>
+        </div>
+        <small id="loginError" style="color: var(--danger-red); display:none; margin-top:4px;">Invalid admin email or password!</small>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <button class="btn btn-secondary" onclick="closeLoginModal()">Cancel</button>
+        <button class="btn" onclick="verifyAdminLogin()">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-banner" id="heroBanner">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>White and Bright Laundry</h1>
+        <p>Tiruchirappalli's trusted laundry service with doorstep pickup, eco-friendly washes, precision ironing, and long-lasting freshness.</p>
+        <div class="contact-bar">
+          <div><strong>Phone:</strong> <span id="displayPhone">7418150911</span></div>
+          <div><strong>Email:</strong> <span id="displayEmail">whiteandbrightlaundry786@gmail.com</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:0; color: var(--trust-navy);">
+          <h3>Operating Hours</h3>
+          <ul id="scheduleDisplay" style="list-style: none; margin-top: 1rem;"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="visual-gallery" id="gallery">
+    <h2 class="section-title">The White and Bright Laundry Promise</h2>
+    <p class="section-subtitle">Delivering pristine cleanliness and care to every garment across Trichy</p>
+    <div class="gallery-grid">
+      <div class="gallery-card">
+        <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcR9zc4sZV_iJCN5F5mbI5d9RNwfRswhJICam_cZOvcIi5jTBUdnnO3UnNZMN4Ym-zn5wONuihW3JpLVxaW07ew3MhH1bd0exWGT" alt="Washed Clothes">
+        <div class="gallery-card-body">
+          <h4>Color-Safe Care</h4>
+          <p>Carefully sorted, gently washed, and basket-ready.</p>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQPOonGfJ77FNFzrgJwl-fMCdS-ICltled2RgzF4GwicQkMyD-eY4H1P1sgdIg3ujfGfJQQKiJj9yidXGhV9SGlo-8Pk-vxjJ3R" alt="Bright White Towels">
+        <div class="gallery-card-body">
+          <h4>Brightest Whites</h4>
+          <p>Specialized stain-removal & brightening treatments.</p>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcRkHXUtt9_Lw7Bk5pN06-aG7dFeLRU2C0pEbrSgXwNOi7Pn_LuE1BrbTdqpNP-ZKhi-8HhJ7HuAzAODfvtr3s4_uHawWraEICse" alt="Fragrant Flowers">
+        <div class="gallery-card-body">
+          <h4>Natural Fragrance</h4>
+          <p>Infused with hypoallergenic floral freshness.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Booking & Review Form Area -->
+  <div class="main-container" id="booking">
+    <div>
+      <div class="card">
+        <h2>1. Your Contact & Address Details</h2>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Full Name <span class="required-star">*</span></label>
+            <input type="text" id="custName" class="form-control" placeholder="Rahul Sharma" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number <span class="required-star">*</span></label>
+            <input type="text" id="custPhone" class="form-control" placeholder="+91 98765 00000" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address <span class="optional-text">(Optional)</span></label>
+          <input type="email" id="custEmail" class="form-control" placeholder="rahul@example.com">
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Pickup Address <span class="required-star">*</span></label>
+            <input type="text" id="custAddress" class="form-control" placeholder="Door/Flat No., Street, Area" required>
+          </div>
+          <div class="form-group">
+            <label>Tiruchirappalli Area/Location <span class="required-star">*</span></label>
+            <input type="text" id="custLocation" class="form-control" placeholder="e.g., Thillai Nagar, Srirangam, Cantonment" required>
+          </div>
+        </div>
+        <small style="color: var(--accent-aqua); font-weight: 600;">⚠️ Service is available strictly within Tiruchirappalli city limits.</small>
+      </div>
+
+      <div class="card">
+        <h2>2. Add Laundry Items</h2>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Fabric / Item Type</label>
+            <select id="fabricSelect" class="form-control"></select>
+          </div>
+          <div class="form-group">
+            <label>Service Type</label>
+            <select id="serviceSelect" class="form-control"></select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Item Quantity</label>
+            <input type="number" id="itemQuantity" class="form-control" value="1" min="1">
+          </div>
+          <div class="form-group" style="display:flex; align-items:flex-end;">
+            <button class="btn" style="width:100%" onclick="addItemToOrder()">Add Item</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Review Submission Card -->
+      <div class="card" id="writeReviewCard">
+        <h2>💬 Leave a Customer Review</h2>
+        <p style="color: var(--slate-muted); font-size: 0.88rem; margin-bottom: 1rem;">Have you used our laundry service? Share your experience with us!</p>
+        
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Your Name <span class="required-star">*</span></label>
+            <input type="text" id="reviewAuthor" class="form-control" placeholder="e.g. Priya M.">
+          </div>
+          <div class="form-group">
+            <label>Rating <span class="required-star">*</span></label>
+            <div class="star-rating" id="starPicker">
+              <span class="star" onclick="selectStar(1)">★</span>
+              <span class="star" onclick="selectStar(2)">★</span>
+              <span class="star" onclick="selectStar(3)">★</span>
+              <span class="star" onclick="selectStar(4)">★</span>
+              <span class="star" onclick="selectStar(5)">★</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Your Feedback / Review <span class="required-star">*</span></label>
+          <textarea id="reviewComment" class="form-control" rows="3" placeholder="Tell us about the fabric quality, pickup speed, or fragrance..."></textarea>
+        </div>
+
+        <button class="btn btn-success" onclick="submitCustomerReview()">Submit Review</button>
+      </div>
+    </div>
+
+    <!-- Order Summary Sidebar -->
+    <div>
+      <div class="card" style="position: sticky; top: 90px;">
+        <h2>Selected Items Summary</h2>
+        <div id="orderItemsList">
+          <p style="color: var(--slate-muted); font-size: 0.9rem;">No items added yet.</p>
+        </div>
+        
+        <div style="background:#FFFBEB; border:1px solid #FCD34D; border-radius:8px; padding:0.75rem; margin-top:1.5rem; font-size:0.82rem; color:#92400E;">
+          ℹ️ <strong>Note:</strong> Pickup time will be scheduled by the admin, and an SMS notification will be sent to your mobile phone.
+        </div>
+        
+        <button class="btn" style="width:100%; margin-top: 1rem;" onclick="submitOrderForApproval()">Submit Order Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Published Customer Reviews Section -->
+  <section class="reviews-section" id="reviewsSection">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <p class="section-subtitle">Real experiences from happy households in Tiruchirappalli</p>
+    <div class="reviews-grid" id="publishedReviewsGrid"></div>
+  </section>
+
+  <!-- Admin Dashboard Container -->
+  <div class="main-container" id="adminPanelContainer">
+    <div class="card" id="adminPanel" style="grid-column: 1 / -1;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid var(--slate-muted); padding-bottom: 0.8rem; margin-bottom: 1.5rem;">
+        <h2>⚙️ White and Bright Laundry Admin Panel</h2>
+        <button class="btn btn-danger" onclick="logoutAdmin()">Logout Admin</button>
+      </div>
+      
+      <!-- Section 1: Customer Orders -->
+      <h3 style="margin-top: 1rem;">1. Customer Orders & SMS Pickup Time Dispatch</h3>
+      <p style="color: var(--slate-muted); font-size: 0.88rem; margin-bottom: 0.75rem;">Set/decide the pickup time for Trichy customers and click "Assign & Accept" to automatically notify their mobile number.</p>
+      <div style="overflow-x: auto; margin-bottom: 2rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Customer Details</th>
+              <th>Address & Location</th>
+              <th>Items Requested</th>
+              <th>Decided Pickup Time</th>
+              <th>Status</th>
+              <th>Action & SMS Notify</th>
+            </tr>
+          </thead>
+          <tbody id="adminOrdersTable"></tbody>
+        </table>
+      </div>
+
+      <!-- Section 2: Manage Customer Reviews -->
+      <h3 style="margin-top: 2rem;">2. Moderate & Manage Customer Reviews</h3>
+      <p style="color: var(--slate-muted); font-size: 0.88rem; margin-bottom: 0.75rem;">Approve customer feedback so it displays publicly on the website.</p>
+      <div style="overflow-x: auto; margin-bottom: 2rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>Author</th>
+              <th>Rating</th>
+              <th>Comment</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="adminReviewsTable"></tbody>
+        </table>
+      </div>
+
+      <!-- Section 3: Business & Fabric Management Settings -->
+      <h3 style="margin-top: 2rem;">3. Business Contact, Fabrics & SMS API Settings</h3>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Business Phone (Editable)</label>
+          <input type="text" id="adminPhone" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Business Email (Editable)</label>
+          <input type="text" id="adminEmail" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Fabric / Item Types List (Comma Separated, Editable)</label>
+        <input type="text" id="adminFabrics" class="form-control" placeholder="e.g. Cotton, Silk, Heavy Bed Sheet, Light Bed Sheet">
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>SMS Gateway API Key (Fast2SMS / Twilio)</label>
+          <input type="text" id="smsApiKey" class="form-control" placeholder="Enter SMS Provider API Key (Optional)">
+        </div>
+        <div class="form-group">
+          <label>Homepage Wallpaper Image URL</label>
+          <input type="text" id="adminWallpaper" class="form-control">
+        </div>
+      </div>
+      <button class="btn" onclick="saveContactSettings()">Save Settings</button>
+
+      <!-- Section 4: Admin Password Security -->
+      <h3 style="margin-top: 2rem;">4. Change Admin Login Password</h3>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>New Admin Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="newAdminPassword" class="form-control" placeholder="Enter new password">
+            <button type="button" class="password-toggle-btn" id="toggleNewPasswordBtn" onclick="togglePasswordVisibility('newAdminPassword', 'toggleNewPasswordBtn')">👁️</button>
+          </div>
+        </div>
+        <div class="form-group" style="display:flex; align-items:flex-end;">
+          <button class="btn btn-success" onclick="changeAdminPassword()">Update Password</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
